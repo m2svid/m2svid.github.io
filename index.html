@@ -93,7 +93,7 @@
             </div>
 
             <div class="column has-text-centered">
-              <div class="publication-links">
+              <div class="publication-links" style="margin-bottom: 0;">
                 <!-- PDF Link. -->
                 <span class="link-block">
                   <button class="external-link button is-normal is-rounded is-dark" disabled>
@@ -171,10 +171,10 @@
               <div class="column is-one-third">
                 <h4 class="title is-5 has-text-centered">Monocular video</h4>
               </div>
-              <div class="column is-one-third">
+              <div class="column is-one-third" style="margin-left: +1.5%;">
                 <h4 class="title is-5 has-text-centered">Left-eye view video</h4>
               </div>
-              <div class="column is-one-third">
+              <div class="column is-one-third" style="margin-left: -1.5%;">
                 <h4 class="title is-5 has-text-centered">Right-eye view video</h4>
               </div>
             </div>
@@ -207,7 +207,8 @@
           <div class="content has-text-justified">
             <p>
               We tackle the problem of monocular-to-stereo video conversion and propose a novel architecture for inpainting and refinement of the warped right view obtained by depth-based reprojection of the input left view. 
-              We extend the Stable Video Diffusion (SVD) model to utilize the input left video, the warped right video, and the disocclusion masks as conditioning input to generate a high-quality right camera view. In order to effectively exploit information from neighboring frames for inpainting, we modify the attention layers in SVD to compute full attention for discoccluded pixels. Our model is trained to generate the right view video in an end-to-end manner by minimizing image space losses to ensure high-quality generation. <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);"><strong>Our approach outperforms previous state-of-the-art methods, obtaining an average rank of 1.43 among the 4 compared methods in a user study, while being ~6x faster than the second placed method.</strong></span>
+              We extend the Stable Video Diffusion (SVD) model to utilize the input left video, the warped right video, and the disocclusion masks as conditioning input to generate a high-quality right camera view. In order to effectively exploit information from neighboring frames for inpainting, we modify the attention layers in SVD to compute full attention for discoccluded pixels. Our model is trained to generate the right view video in an end-to-end manner by minimizing image space losses to ensure high-quality generation. 
+              <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);"><strong>Our approach outperforms previous state-of-the-art methods, obtaining an average rank of 1.43 among the 4 compared methods in a user study, while being \(6 \times\)faster than the second placed method.</strong></span>
             </p>
           </div>
         </div>
@@ -228,7 +229,7 @@
             <img width="100%" src="./static/images/m2svid_overview.png" alt="M2SVid Overview"/>
             <p style="margin-top: 15px; font-size: 1rem; color: #555;">
               Given an input monocular video \(V_l\), which serves as the left camera view, we first estimate per-pixel depth using an off-the-shelf depth estimation model.
-              Using the estimated depth, we then warp the input video to obtain a right camera view, producing both the warped right view \(V_r^\text{warped}\) and a disocclusion mask \(M^\text{occ}_r\).
+              Using the estimated depth, we then warp the input video to obtain a right camera view, producing both the warped right view \(V_r^\text{warp}\) and a disocclusion mask \(M^\text{occ}_r\).
               The input video, the warped view, and the disocclusion mask are then passed to <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);">our video inpainting and refinement module</span> to generate the final right view \(\hat{V}_r\) <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);">in a single diffusion step</span>.
             </p>
           </div>
@@ -238,11 +239,11 @@
             <img width="100%" src="./static/images/m2svid.png" alt="M2SVid Method"/>
             <p style="margin-top: 15px; font-size: 1rem; color: #555;">
               We introduce <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);">an efficient end-to-end model</span> for
-              generating a high-quality right video from the reprojected
+              generating a high-quality right video from the warped
               right video. Our model inpaints the discoccluded regions in the warped right view, and corrects possible artifacts introduced by warping errors. 
-              We base our model on a strong pre-trained video diffusion model, namely Stable Video Diffusion (SVD), to benefit from learned video priors.
+              We base our model on a strong video diffusion model, namely Stable Video Diffusion (SVD), to benefit from learned video priors.
               The model takes the VAE encodings of the input left view \(V_l\), 
-              reprojected right view \(V_r^\text{warped}\), and the disocclusion mask \(M^\text{occ}_r\) as conditioning to the Video U-Net.
+              warped right view \(V_r^\text{warp}\), and the disocclusion mask \(M^\text{occ}_r\) as conditioning to the Video U-Net.
               The latent encodings of the refined right view are then generated <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);">in a single denoising step,</span>
                and then decoded by the VAE Decoder to generate the output right video. 
                In order to effectively utilize the information from neighboring frames for inpainting, 
@@ -290,15 +291,15 @@
                 </video>
               </div>
             </div>
-            <div class="column is-12" style="margin-top: 20px;">
+            <div class="column is-12" style="margin-top: 10px;">
               <div class="has-text-centered">
-                <a href="./static/videos/results/breakdance-flare_sbs.mp4" download class="button is-small is-light" style="margin-right: 20px;">
+                <a href="./static/videos/results/breakdance-flare_sbs.mp4" download class="button is-small is-light" style="margin-right: 20px; background-color: #e8e8e8;">
                   <span class="icon">
                     <i class="fas fa-download"></i>
                   </span>
                   <span>Download side-by-side video</span>
                 </a>
-                <a href="./static/videos/results/breakdance-flare_anaglyph.mp4" download class="button is-small is-light">
+                <a href="./static/videos/results/breakdance-flare_anaglyph.mp4" download class="button is-small is-light" style="background-color: #e8e8e8;">
                   <span class="icon">
                     <i class="fas fa-download"></i>
                   </span>
@@ -333,15 +334,15 @@
                 </video>
               </div>
             </div>
-            <div class="column is-12" style="margin-top: 20px;">
+            <div class="column is-12" style="margin-top: 10px;">
               <div class="has-text-centered">
-                <a href="./static/videos/results/bmx-trees_sbs.mp4" download class="button is-small is-light" style="margin-right: 20px;">
+                <a href="./static/videos/results/bmx-trees_sbs.mp4" download class="button is-small is-light" style="margin-right: 20px; background-color: #e8e8e8;">
                   <span class="icon">
                     <i class="fas fa-download"></i>
                   </span>
                   <span>Download side-by-side video</span>
                 </a>
-                <a href="./static/videos/results/bmx-trees_anaglyph.mp4" download class="button is-small is-light">
+                <a href="./static/videos/results/bmx-trees_anaglyph.mp4" download class="button is-small is-light" style="background-color: #e8e8e8;">
                   <span class="icon">
                     <i class="fas fa-download"></i>
                   </span>
@@ -376,15 +377,15 @@
                 </video>
               </div>
             </div>
-            <div class="column is-12" style="margin-top: 20px;">
+            <div class="column is-12" style="margin-top: 10px;">
               <div class="has-text-centered">
-                <a href="./static/videos/results/breakdance_sbs.mp4" download class="button is-small is-light" style="margin-right: 20px;">
+                <a href="./static/videos/results/breakdance_sbs.mp4" download class="button is-small is-light" style="margin-right: 20px; background-color: #e8e8e8;">
                   <span class="icon">
                     <i class="fas fa-download"></i>
                   </span>
                   <span>Download side-by-side video</span>
                 </a>
-                <a href="./static/videos/results/breakdance_anaglyph.mp4" download class="button is-small is-light">
+                <a href="./static/videos/results/breakdance_anaglyph.mp4" download class="button is-small is-light" style="background-color: #e8e8e8;">
                   <span class="icon">
                     <i class="fas fa-download"></i>
                   </span>
@@ -398,10 +399,18 @@
 
           <h2 class="title is-5 has-text-centered" style="margin-bottom: 2rem;">Qualitative Comparison</h4>
           
+          <div class="content has-text-justified">
+            <p style="margin-top: 15px; font-size: 1rem; color: #555;">
+              We compare our method to the recent state-of-the-art 
+              monocular-to-stereo conversion models SVG and StereoCrafter. For more results, please click left and right arrows below. 
+            </p>
+          </div>
+
+
           <div class="columns is-centered">
             <div class="column is-full">
-              <div class="carousel" style="position: relative;">
-                <div class="carousel-navigation" style="position: absolute; top: -40px; width: 100%; z-index: 10;">
+              <div class="carousel" style="position: relative; margin-top: 3rem;">
+                <div class="carousel-navigation" style="position: absolute; top: -60px; width: 100%; z-index: 10;">
                   <div class="carousel-nav-left" style="position: absolute; left: 20px; cursor: pointer; background: #fff9c4; padding: 10px 80px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
                     <i class="fas fa-chevron-left" style="color: #333; font-size: 24px;"></i>
                   </div>
@@ -453,8 +462,18 @@
 
           <h4 class="title is-5 has-text-centered" style="margin-bottom: 2rem;">User Study</h4>
           <div class="container is-max-desktop">
+            
             <div class="columns is-centered has-text-centered">
               <div class="column is-four-fifths">
+                <div class="content has-text-justified">
+                  <p>
+                    We also perform a user study to evaluate the quality of the generated right views as well as run-time analisys.
+                    Participants were asked to rank the quality of the generated videos from 1 (best) to 4 (worst), 
+                    taking into account factors such as temporal consistency, image quality (i.e. sharpness) and lack of artifacts.
+                    Run-times are computed using an A100 GPU on a 512x512 videos with 16 frames. 
+                  </p>
+                </div>
+
                 <div style="display: flex; justify-content: center;">
                   <table class="table is-bordered is-striped" style="margin-bottom: 2rem; width: 100%;">
                     <thead>
@@ -485,7 +504,7 @@
                         <td>2.4</td>
                       </tr>
                       <tr style="background-color: #fff9c4;">
-                        <td><strong>Ours</strong></td>
+                        <td><strong>M2SVid (ours)</strong></td>
                         <td>1 step</td>
                         <td><strong>1.43</strong></td>
                         <td><strong>2.1</strong></td>
@@ -493,11 +512,14 @@
                     </tbody>
                   </table>
                 </div>
+
                 <div class="content has-text-justified">
                   <p>
-                    Average human perception study rankings over 21 videos with 13 distinct users. The ranking ranges from 1 to 4, with 1 being the best. Our method significantly outperforms StereoCrafter with an average rank of 1.43. We also show the run-times computed using an A100 GPU on a 512×512 videos with 16 frames.
+                    <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);"><strong>Our method significantly outperforms StereoCrafter and SVG with an average rank of 1.43.  
+                    Our method also achieves a 6x and 635x speed-up compared to StereoCrafter with 25 steps and SVG respectively.</strong>
                   </p>
                 </div>
+                
               </div>
             </div>
           </div>
@@ -510,11 +532,12 @@
             <div class="columns is-centered has-text-centered">
               <div class="column is-four-fifths">
                 <div style="display: flex; justify-content: center;">
-                  <img width="100%" src="./static/images/comparison.png" alt="Comparison with SOTA"/>
+                  <img width="100%" src="./static/images/comparison.png" alt="Comparison with SOTA" style="margin-bottom: 2rem;"/>
                 </div>
+
                 <div class="content has-text-justified">
                   <p>
-                    Qualitative comparison of our approach with state-of-the-art methods SVG and StereoCrafter. Our approach can effectively preserve the high-frequency information from the input video and generate high-quality right views.
+                    Our approach can effectively preserve the high-frequency information from the input video and generate high-quality right views.
                   </p>
                 </div>
               </div>
@@ -549,6 +572,10 @@
               Website template based on
               <a href="https://github.com/nerfies/nerfies.github.io">
                 Nerfies
+              </a>
+              and
+              <a href="https://github.com/sambamotr/sambamotr.github.io">
+                SambaMOTR
               </a>
               and licensed under
               <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
