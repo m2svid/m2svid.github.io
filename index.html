@@ -40,6 +40,43 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    @media screen and (max-width: 768px) {
+      .mobile-wrap {
+        font-size: 0.9rem;
+        line-height: 1.2;
+      }
+      .mobile-wrap strong {
+        display: block;
+      }
+      .carousel-nav-left, .carousel-nav-right {
+        padding: 8px 20px !important;
+      }
+      .carousel-nav-left i, .carousel-nav-right i {
+        font-size: 16px !important;
+      }
+      .publication-links {
+        flex-direction: column !important;
+        gap: 8px !important;
+      }
+      .download-buttons {
+        flex-direction: column !important;
+        gap: 8px !important;
+      }
+    }
+    .carousel-nav-left, .carousel-nav-right {
+      padding: 10px 60px;
+    }
+    .carousel-nav-left i, .carousel-nav-right i {
+      font-size: 20px;
+    }
+    .publication-links, .download-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+  </style>
 </head>
 
 <body>
@@ -112,17 +149,6 @@
                     <span>Code (Coming Soon)</span>
                   </button>
                 </span>
-                <!-- Model Link (commented out for future use)
-                <span class="link-block">
-                  <a href="#" target="_blank" rel="noopener noreferrer"
-                     class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                        &#129303;
-                    </span>
-                    <span>Model</span>
-                  </a>
-                </span>
-                -->
               </div>
             </div>
           </div>
@@ -191,12 +217,12 @@
       <div class="hero-body">
         <div class="columns is-centered">
           <div class="column is-10">
-            <div class="columns" style="margin-bottom: 10px;">
-              <div class="column is-half" style="margin-left: -1.5%;">
-                <h4 class="title is-5 has-text-centered">Monocular video</h4>
+            <div class="columns is-mobile" style="margin-bottom: 10px;">
+              <div class="column is-6" style="padding-right: 0; margin-left: -3%;">
+                <h4 class="title is-5 has-text-centered" style="margin-bottom: 0;">Monocular video</h4>
               </div>
-              <div class="column is-half" style="margin-left: +3%;">
-                <h4 class="title is-5 has-text-centered">Stereo video (Anaglyph 3D)</h4>
+              <div class="column is-6" style="padding-left: 0; margin-left: 6%;">
+                <h4 class="title is-5 has-text-centered" style="margin-bottom: 0;">Stereo video (Anaglyph 3D)</h4>
               </div>
             </div>
             <img src="./static/images/teaser2.gif" alt="Teaser GIF" style="width: 100%; max-width: 1200px; margin: 0 auto; display: block;">
@@ -285,17 +311,17 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-full">
           <h2 class="title is-3 has-text-centered" style="padding-top: 20px;">Results</h2>
-          <h3 class="title is-5 has-text-centered" style="margin-bottom: 2rem;">Generated Right Views on DAVIS</h3>
+          <h3 class="title is-5 has-text-centered" style="margin-bottom: 2rem;">Qualitative Results on DAVIS</h3>
           
           <!-- Breakdance Flare Example -->
           <div class="columns is-multiline is-gapless" style="margin-bottom: 3rem;">
             <div class="column is-8">
-              <div class="columns is-gapless" style="margin-bottom: 10px;">
-                <div class="column is-6">
-                  <p class="has-text-centered"><strong>Input</strong>: Left-eye video</p>
+              <div class="columns is-mobile is-gapless" style="margin-bottom: 10px;">
+                <div class="column is-6" style="padding-right: 0;">
+                  <p class="has-text-centered mobile-wrap"><strong>Input:</strong> Left-eye video</p>
                 </div>
-                <div class="column is-6">
-                  <p class="has-text-centered"><strong>Generated</strong>: Right-eye video</p>
+                <div class="column is-6" style="padding-left: 0;">
+                  <p class="has-text-centered mobile-wrap"><strong>Generated:</strong> Right-eye video</p>
                 </div>
               </div>
               <div class="video-container">
@@ -305,7 +331,7 @@
               </div>
             </div>
             <div class="column is-4">
-              <p class="has-text-centered" style="margin-bottom: 10px;"><strong>Generated</strong>: Anaglyph 3D</p>
+              <p class="has-text-centered" style="margin-bottom: 10px;"><strong>Generated:</strong> Anaglyph 3D</p>
               <div class="video-container">
                 <video poster="" autoplay controls muted loop playsinline width="100%">
                   <source src="./static/videos/results/breakdance-flare_anaglyph.mp4" type="video/mp4">
@@ -313,8 +339,8 @@
               </div>
             </div>
             <div class="column is-12" style="margin-top: 10px;">
-              <div class="has-text-centered">
-                <a href="./static/videos/results/breakdance-flare_sbs.mp4" download class="button is-small is-light" style="margin-right: 20px; background-color: #e8e8e8;">
+              <div class="download-buttons has-text-centered">
+                <a href="./static/videos/results/breakdance-flare_sbs.mp4" download class="button is-small is-light" style="background-color: #e8e8e8;">
                   <span class="icon">
                     <i class="fas fa-download"></i>
                   </span>
@@ -333,12 +359,12 @@
           <!-- BMX Trees Example -->
           <div class="columns is-multiline is-gapless" style="margin-bottom: 3rem;">
             <div class="column is-8">
-              <div class="columns is-gapless" style="margin-bottom: 10px;">
-                <div class="column is-6">
-                  <p class="has-text-centered"><strong>Input</strong>: Left-eye video</p>
+              <div class="columns is-mobile is-gapless" style="margin-bottom: 10px;">
+                <div class="column is-6" style="padding-right: 0;">
+                  <p class="has-text-centered mobile-wrap"><strong>Input:</strong> Left-eye video</p>
                 </div>
-                <div class="column is-6">
-                  <p class="has-text-centered"><strong>Generated</strong>: Right-eye video</p>
+                <div class="column is-6" style="padding-left: 0;">
+                  <p class="has-text-centered mobile-wrap"><strong>Generated:</strong> Right-eye video</p>
                 </div>
               </div>
               <div class="video-container">
@@ -348,7 +374,7 @@
               </div>
             </div>
             <div class="column is-4">
-              <p class="has-text-centered" style="margin-bottom: 10px;"><strong>Generated</strong>: Anaglyph 3D</p>
+              <p class="has-text-centered" style="margin-bottom: 10px;"><strong>Generated:</strong> Anaglyph 3D</p>
               <div class="video-container">
                 <video poster="" autoplay controls muted loop playsinline width="100%">
                   <source src="./static/videos/results/bmx-trees_anaglyph.mp4" type="video/mp4">
@@ -356,8 +382,8 @@
               </div>
             </div>
             <div class="column is-12" style="margin-top: 10px;">
-              <div class="has-text-centered">
-                <a href="./static/videos/results/bmx-trees_sbs.mp4" download class="button is-small is-light" style="margin-right: 20px; background-color: #e8e8e8;">
+              <div class="download-buttons has-text-centered">
+                <a href="./static/videos/results/bmx-trees_sbs.mp4" download class="button is-small is-light" style="background-color: #e8e8e8;">
                   <span class="icon">
                     <i class="fas fa-download"></i>
                   </span>
@@ -376,12 +402,12 @@
           <!-- Breakdance Example -->
           <div class="columns is-multiline is-gapless">
             <div class="column is-8">
-              <div class="columns is-gapless" style="margin-bottom: 10px;">
-                <div class="column is-6">
-                  <p class="has-text-centered"><strong>Input</strong>: Left-eye video</p>
+              <div class="columns is-mobile is-gapless" style="margin-bottom: 10px;">
+                <div class="column is-6" style="padding-right: 0;">
+                  <p class="has-text-centered mobile-wrap"><strong>Input:</strong> Left-eye video</p>
                 </div>
-                <div class="column is-6">
-                  <p class="has-text-centered"><strong>Generated</strong>: Right-eye video</p>
+                <div class="column is-6" style="padding-left: 0;">
+                  <p class="has-text-centered mobile-wrap"><strong>Generated:</strong> Right-eye video</p>
                 </div>
               </div>
               <div class="video-container">
@@ -391,7 +417,7 @@
               </div>
             </div>
             <div class="column is-4">
-              <p class="has-text-centered" style="margin-bottom: 10px;"><strong>Generated</strong>: Anaglyph 3D</p>
+              <p class="has-text-centered" style="margin-bottom: 10px;"><strong>Generated:</strong> Anaglyph 3D</p>
               <div class="video-container">
                 <video poster="" autoplay controls muted loop playsinline width="100%">
                   <source src="./static/videos/results/breakdance_anaglyph.mp4" type="video/mp4">
@@ -399,8 +425,8 @@
               </div>
             </div>
             <div class="column is-12" style="margin-top: 10px;">
-              <div class="has-text-centered">
-                <a href="./static/videos/results/breakdance_sbs.mp4" download class="button is-small is-light" style="margin-right: 20px; background-color: #e8e8e8;">
+              <div class="download-buttons has-text-centered">
+                <a href="./static/videos/results/breakdance_sbs.mp4" download class="button is-small is-light" style="background-color: #e8e8e8;">
                   <span class="icon">
                     <i class="fas fa-download"></i>
                   </span>
@@ -432,11 +458,11 @@
             <div class="column is-full">
               <div class="carousel" style="position: relative; margin-top: 3rem;">
                 <div class="carousel-navigation" style="position: absolute; top: -60px; width: 100%; z-index: 10;">
-                  <div class="carousel-nav-left" style="position: absolute; left: 20px; cursor: pointer; background: #fff9c4; padding: 10px 80px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-                    <i class="fas fa-chevron-left" style="color: #333; font-size: 24px;"></i>
+                  <div class="carousel-nav-left" style="position: absolute; left: 20px; cursor: pointer; background: #fff9c4; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                    <i class="fas fa-chevron-left" style="color: #333;"></i>
                   </div>
-                  <div class="carousel-nav-right" style="position: absolute; right: 20px; cursor: pointer; background: #fff9c4; padding: 10px 80px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-                    <i class="fas fa-chevron-right" style="color: #333; font-size: 24px;"></i>
+                  <div class="carousel-nav-right" style="position: absolute; right: 20px; cursor: pointer; background: #fff9c4; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                    <i class="fas fa-chevron-right" style="color: #333;"></i>
                   </div>
                 </div>
                 <div class="carousel-container" style="overflow: hidden;">
@@ -547,7 +573,7 @@
 
           
 
-          <h4 class="title is-5 has-text-centered" style="margin-bottom: 2rem;">Detailed Comparison</h4>
+          <h4 class="title is-5 has-text-centered" style="margin-bottom: 2rem; margin-top: 4rem;">Detailed Comparison</h4>
           
           <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
