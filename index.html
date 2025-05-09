@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="M2SVid: End-to-End Inpainting and Refinement for Monocular-to-Stereo Video Conversion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>M2SVid: End-to-End Inpainting and Refinement for Monocular-to-Stereo Video Conversion</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1FWSVCGZTG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-1FWSVCGZTG');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/logo.png" type="image/png"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+  <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color: #f8f9fa; padding: 0rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); overflow-x: auto;">
+    <div class="container is-max-desktop">
+      <div class="navbar-brand" style="display: flex; justify-content: center; width: 100%;">
+        <!-- Updated to allow horizontal scrolling on mobile -->
+        <a class="navbar-item" href="#abstract" style="font-weight: bold;">Abstract</a>
+        <a class="navbar-item" href="#m2svid" style="font-weight: bold;">M2SVid</a>
+        <a class="navbar-item" href="#results" style="font-weight: bold;">Results</a>
+        <a class="navbar-item" href="#Cite Us!" style="font-weight: bold;">Cite Us!</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- Logo placed above the title -->
+            <h1 class="title publication-title" style="font-size: 2.5rem;">M2SVid: End-to-End Inpainting and Refinement for Monocular-to-Stereo Video Conversion</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a target="_blank" rel="noopener noreferrer" href="https://ninatu.github.io/">Nina Shvetsova</a><sup>1,2,3,4</sup><sup>*</sup>,
+              </span>
+              <span class="author-block">
+                <a target="_blank" rel="noopener noreferrer" href="https://goutamgmb.github.io/">Goutam Bhat</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a target="_blank" rel="noopener noreferrer" href="https://prunetruong.com/">Prune Truong</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a target="_blank" rel="noopener noreferrer" href="https://hildekuehne.github.io/">Hilde Kuehne</a><sup>2,3</sup>,
+              </span>
+              <span class="author-block">
+                <a target="_blank" rel="noopener noreferrer" href="https://federicotombari.github.io/">Federico Tombari</a><sup>1,5</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Google, </span>
+              <span class="author-block"><sup>2</sup>Tuebingen AI Center/University of Tuebingen, </span>
+              <span class="author-block"><sup>3</sup>Goethe University Frankfurt, </span>
+              <span class="author-block"><sup>4</sup>MPI for Informatics, Saarland Informatics Campus, </span>
+              <span class="author-block"><sup>5</sup>Technical University of Munich</span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>*</sup>This work was conducted during an internship at Google</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <button class="external-link button is-normal is-rounded is-dark" disabled>
+                    <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper (Coming Soon)</span>
+                  </button>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <button class="external-link button is-normal is-rounded is-dark" disabled>
+                    <span class="icon">
+                        <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Coming Soon)</span>
+                  </button>
+                </span>
+                <!-- Model Link (commented out for future use)
+                <span class="link-block">
+                  <a href="#" target="_blank" rel="noopener noreferrer"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        &#129303;
+                    </span>
+                    <span>Model</span>
+                  </a>
+                </span>
+                -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    $(document).ready(function() {
+      let angle = 0;
+      setInterval(function() {
+        angle += 360/7;
+        $('#rotatingImage').css({
+          'transform': 'rotate(' + angle + 'deg)',
+          'transition': 'transform 0.5s'
+        });
+      }, 3000);
+
+      // Initialize SOTA comparison carousel
+      let currentIndex = 0;
+      const videos = $('.carousel-item');
+      videos.eq(0).show(); // Show first video
+
+      $('.carousel-nav-left').click(function() {
+        videos.eq(currentIndex).hide();
+        currentIndex = (currentIndex - 1 + videos.length) % videos.length;
+        videos.eq(currentIndex).show();
+      });
+
+      $('.carousel-nav-right').click(function() {
+        videos.eq(currentIndex).hide();
+        currentIndex = (currentIndex + 1) % videos.length;
+        videos.eq(currentIndex).show();
+      });
+    });
+  </script>
+
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <div class="columns is-centered">
+          <div class="column is-10">
+            <div class="columns" style="margin-bottom: 10px;">
+              <div class="column is-one-third">
+                <h4 class="title is-5 has-text-centered">Monocular video</h4>
+              </div>
+              <div class="column is-one-third">
+                <h4 class="title is-5 has-text-centered">Left-eye view video</h4>
+              </div>
+              <div class="column is-one-third">
+                <h4 class="title is-5 has-text-centered">Right-eye view video</h4>
+              </div>
+            </div>
+            <img src="./static/images/teaser.gif" alt="Teaser GIF" style="width: 100%; max-width: 1200px; margin: 0 auto; display: block;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Added audio player below the teaser images -->
+  <!-- <div class="podcast-container" style="text-align: center; margin: 0px 0;">
+    <audio controls style="width: 50%; height: 50px;">
+      <source src="./static/audio/notebook_lm.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+    <h4 style="margin-bottom: 20px;">
+      Podcast generated by <a href="https://notebooklm.google.com/" target="_blank">NotebookLM</a>
+    </h4>
+  </div> -->
+  <!-- End of audio player -->
+   
+  <hr style="border: 1px solid #e0e0e0; margin: 20px auto; width: 50%;">
+
+  <section class="section pt-0" id="abstract">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3 has-text-centered" style="padding-top: 20px;">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              We tackle the problem of monocular-to-stereo video conversion and propose a novel architecture for inpainting and refinement of the warped right view obtained by depth-based reprojection of the input left view. 
+              We extend the Stable Video Diffusion (SVD) model to utilize the input left video, the warped right video, and the disocclusion masks as conditioning input to generate a high-quality right camera view. In order to effectively exploit information from neighboring frames for inpainting, we modify the attention layers in SVD to compute full attention for discoccluded pixels. Our model is trained to generate the right view video in an end-to-end manner by minimizing image space losses to ensure high-quality generation. <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);"><strong>Our approach outperforms previous state-of-the-art methods, obtaining an average rank of 1.43 among the 4 compared methods in a user study, while being ~6x faster than the second placed method.</strong></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr style="border: 1px solid #e0e0e0; margin: 20px auto; width: 50%;">
+
+  <section class="section pt-0" id="m2svid">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3 has-text-centered" style="padding-top: 20px;">M2SVid: Monocular-to-Stereo Video Conversion</h2>
+          
+          <h3 class="title is-4 has-text-centered" style="padding-top: 20px;">Overview</h3>
+          <div class="content has-text-justified">
+            <img width="100%" src="./static/images/m2svid_overview.png" alt="M2SVid Overview"/>
+            <p style="margin-top: 15px; font-size: 1rem; color: #555;">
+              Given an input monocular video \(V_l\), which serves as the left camera view, we first estimate per-pixel depth using an off-the-shelf depth estimation model.
+              Using the estimated depth, we then warp the input video to obtain a right camera view, producing both the warped right view \(V_r^\text{warped}\) and a disocclusion mask \(M^\text{occ}_r\).
+              The input video, the warped view, and the disocclusion mask are then passed to <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);">our video inpainting and refinement module</span> to generate the final right view \(\hat{V}_r\) <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);">in a single diffusion step</span>.
+            </p>
+          </div>
+
+          <h3 class="title is-4 has-text-centered" style="padding-top: 20px;">Our End-to-End Video Inpainting and Refinement Module</h3>
+          <div class="content has-text-justified">
+            <img width="100%" src="./static/images/m2svid.png" alt="M2SVid Method"/>
+            <p style="margin-top: 15px; font-size: 1rem; color: #555;">
+              We introduce <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);">an efficient end-to-end model</span> for
+              generating a high-quality right video from the reprojected
+              right video. Our model inpaints the discoccluded regions in the warped right view, and corrects possible artifacts introduced by warping errors. 
+              We base our model on a strong pre-trained video diffusion model, namely Stable Video Diffusion (SVD), to benefit from learned video priors.
+              The model takes the VAE encodings of the input left view \(V_l\), 
+              reprojected right view \(V_r^\text{warped}\), and the disocclusion mask \(M^\text{occ}_r\) as conditioning to the Video U-Net.
+              The latent encodings of the refined right view are then generated <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);">in a single denoising step,</span>
+               and then decoded by the VAE Decoder to generate the output right video. 
+               In order to effectively utilize the information from neighboring frames for inpainting, 
+               we extend the spatial attention layer in SVD to compute <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);">full attention for the disoccluded tokens.</span> 
+               The model is trained <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);">end-to-end by minimizing image space and latent space losses.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <hr style="border: 1px solid #e0e0e0; margin: 20px auto; width: 50%;">
+
+  <section class="section pt-0" id="results">
+    <div class="container is-fluid">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full">
+          <h2 class="title is-3 has-text-centered" style="padding-top: 20px;">Results</h2>
+          <h3 class="title is-5 has-text-centered" style="margin-bottom: 2rem;">Generated Right Views on DAVIS</h3>
+          
+          <!-- Breakdance Flare Example -->
+          <div class="columns is-multiline is-gapless" style="margin-bottom: 3rem;">
+            <div class="column is-8">
+              <div class="columns is-gapless" style="margin-bottom: 10px;">
+                <div class="column is-6">
+                  <p class="has-text-centered"><strong>Input</strong>: Left-eye video</p>
+                </div>
+                <div class="column is-6">
+                  <p class="has-text-centered"><strong>Generated</strong>: Right-eye video</p>
+                </div>
+              </div>
+              <div class="video-container">
+                <video poster="" autoplay controls muted loop playsinline width="100%">
+                  <source src="./static/videos/results/breakdance-flare_sbs.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="column is-4">
+              <p class="has-text-centered" style="margin-bottom: 10px;"><strong>Generated</strong>: Anaglyph 3D</p>
+              <div class="video-container">
+                <video poster="" autoplay controls muted loop playsinline width="100%">
+                  <source src="./static/videos/results/breakdance-flare_anaglyph.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="column is-12" style="margin-top: 20px;">
+              <div class="has-text-centered">
+                <a href="./static/videos/results/breakdance-flare_sbs.mp4" download class="button is-small is-light" style="margin-right: 20px;">
+                  <span class="icon">
+                    <i class="fas fa-download"></i>
+                  </span>
+                  <span>Download side-by-side video</span>
+                </a>
+                <a href="./static/videos/results/breakdance-flare_anaglyph.mp4" download class="button is-small is-light">
+                  <span class="icon">
+                    <i class="fas fa-download"></i>
+                  </span>
+                  <span>Download Anaglyph 3D</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- BMX Trees Example -->
+          <div class="columns is-multiline is-gapless" style="margin-bottom: 3rem;">
+            <div class="column is-8">
+              <div class="columns is-gapless" style="margin-bottom: 10px;">
+                <div class="column is-6">
+                  <p class="has-text-centered"><strong>Input</strong>: Left-eye video</p>
+                </div>
+                <div class="column is-6">
+                  <p class="has-text-centered"><strong>Generated</strong>: Right-eye video</p>
+                </div>
+              </div>
+              <div class="video-container">
+                <video poster="" autoplay controls muted loop playsinline width="100%">
+                  <source src="./static/videos/results/bmx-trees_sbs.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="column is-4">
+              <p class="has-text-centered" style="margin-bottom: 10px;"><strong>Generated</strong>: Anaglyph 3D</p>
+              <div class="video-container">
+                <video poster="" autoplay controls muted loop playsinline width="100%">
+                  <source src="./static/videos/results/bmx-trees_anaglyph.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="column is-12" style="margin-top: 20px;">
+              <div class="has-text-centered">
+                <a href="./static/videos/results/bmx-trees_sbs.mp4" download class="button is-small is-light" style="margin-right: 20px;">
+                  <span class="icon">
+                    <i class="fas fa-download"></i>
+                  </span>
+                  <span>Download side-by-side video</span>
+                </a>
+                <a href="./static/videos/results/bmx-trees_anaglyph.mp4" download class="button is-small is-light">
+                  <span class="icon">
+                    <i class="fas fa-download"></i>
+                  </span>
+                  <span>Download Anaglyph 3D</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Breakdance Example -->
+          <div class="columns is-multiline is-gapless">
+            <div class="column is-8">
+              <div class="columns is-gapless" style="margin-bottom: 10px;">
+                <div class="column is-6">
+                  <p class="has-text-centered"><strong>Input</strong>: Left-eye video</p>
+                </div>
+                <div class="column is-6">
+                  <p class="has-text-centered"><strong>Generated</strong>: Right-eye video</p>
+                </div>
+              </div>
+              <div class="video-container">
+                <video poster="" autoplay controls muted loop playsinline width="100%">
+                  <source src="./static/videos/results/breakdance_sbs.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="column is-4">
+              <p class="has-text-centered" style="margin-bottom: 10px;"><strong>Generated</strong>: Anaglyph 3D</p>
+              <div class="video-container">
+                <video poster="" autoplay controls muted loop playsinline width="100%">
+                  <source src="./static/videos/results/breakdance_anaglyph.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="column is-12" style="margin-top: 20px;">
+              <div class="has-text-centered">
+                <a href="./static/videos/results/breakdance_sbs.mp4" download class="button is-small is-light" style="margin-right: 20px;">
+                  <span class="icon">
+                    <i class="fas fa-download"></i>
+                  </span>
+                  <span>Download side-by-side video</span>
+                </a>
+                <a href="./static/videos/results/breakdance_anaglyph.mp4" download class="button is-small is-light">
+                  <span class="icon">
+                    <i class="fas fa-download"></i>
+                  </span>
+                  <span>Download Anaglyph 3D</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="title is-4 has-text-centered" style="padding-top: 20px; margin-bottom: 2rem;">Comparison with SOTA</h3>
+
+          <h2 class="title is-5 has-text-centered" style="margin-bottom: 2rem;">Qualitative Comparison</h4>
+          
+          <div class="columns is-centered">
+            <div class="column is-full">
+              <div class="carousel" style="position: relative;">
+                <div class="carousel-navigation" style="position: absolute; top: -40px; width: 100%; z-index: 10;">
+                  <div class="carousel-nav-left" style="position: absolute; left: 20px; cursor: pointer; background: #fff9c4; padding: 10px 80px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                    <i class="fas fa-chevron-left" style="color: #333; font-size: 24px;"></i>
+                  </div>
+                  <div class="carousel-nav-right" style="position: absolute; right: 20px; cursor: pointer; background: #fff9c4; padding: 10px 80px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                    <i class="fas fa-chevron-right" style="color: #333; font-size: 24px;"></i>
+                  </div>
+                </div>
+                <div class="carousel-container" style="overflow: hidden;">
+                  <div class="carousel-item" style="display: none;">
+                    <video poster="" autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/videos/sota_comparison/bear.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="carousel-item" style="display: none;">
+                    <video poster="" autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/videos/sota_comparison/coffee.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="carousel-item" style="display: none;">
+                    <video poster="" autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/videos/sota_comparison/dance-twirl.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="carousel-item" style="display: none;">
+                    <video poster="" autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/videos/sota_comparison/dogskateboarder.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="carousel-item" style="display: none;">
+                    <video poster="" autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/videos/sota_comparison/hike.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="carousel-item" style="display: none;">
+                    <video poster="" autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/videos/sota_comparison/kite-walk.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="carousel-item" style="display: none;">
+                    <video poster="" autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/videos/sota_comparison/parkour.mp4" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <h4 class="title is-5 has-text-centered" style="margin-bottom: 2rem;">User Study</h4>
+          <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-four-fifths">
+                <div style="display: flex; justify-content: center;">
+                  <table class="table is-bordered is-striped" style="margin-bottom: 2rem; width: 100%;">
+                    <thead>
+                      <tr>
+                        <th>Method</th>
+                        <th>Denoising steps</th>
+                        <th>Average rank ↓</th>
+                        <th>Latency (s) ↓</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>SVG</td>
+                        <td>50 steps</td>
+                        <td>2.88</td>
+                        <td>1270.4</td>
+                      </tr>
+                      <tr>
+                        <td>StereoCrafter</td>
+                        <td>25 steps</td>
+                        <td>2.05</td>
+                        <td>12.2</td>
+                      </tr>
+                      <tr>
+                        <td>StereoCrafter</td>
+                        <td>1 step</td>
+                        <td>3.46</td>
+                        <td>2.4</td>
+                      </tr>
+                      <tr style="background-color: #fff9c4;">
+                        <td><strong>Ours</strong></td>
+                        <td>1 step</td>
+                        <td><strong>1.43</strong></td>
+                        <td><strong>2.1</strong></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="content has-text-justified">
+                  <p>
+                    Average human perception study rankings over 21 videos with 13 distinct users. The ranking ranges from 1 to 4, with 1 being the best. Our method significantly outperforms StereoCrafter with an average rank of 1.43. We also show the run-times computed using an A100 GPU on a 512×512 videos with 16 frames.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+
+          <h4 class="title is-5 has-text-centered" style="margin-bottom: 2rem;">Detailed Comparison</h4>
+          
+          <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-four-fifths">
+                <div style="display: flex; justify-content: center;">
+                  <img width="100%" src="./static/images/comparison.png" alt="Comparison with SOTA"/>
+                </div>
+                <div class="content has-text-justified">
+                  <p>
+                    Qualitative comparison of our approach with state-of-the-art methods SVG and StereoCrafter. Our approach can effectively preserve the high-frequency information from the input video and generate high-quality right views.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr style="border: 1px solid #e0e0e0; margin: 20px auto; width: 50%;">
+
+  <section class="section pt-0" id="Cite Us!">
+    <div class="container is-max-desktop content">
+      <h2 class="title has-text-centered" style="padding-top: 20px;">BibTeX</h2>
+      <pre class="selectable"><code>@article{shvetsova2025m2svid,
+  author   =  {Shvetsova, Nina and Bhat, Goutam and Truong, Prune and Kuehne, Hilde and Tombari, Federico},
+  title    =  {M2SVid: End-to-End Inpainting and Refinement for Monocular-to-Stereo Video Conversion},
+  year     =  {2025}
+}</code></pre>
+    </div>
+  </section>
+
+  <hr style="border: 1px solid #e0e0e0; margin: 20px auto; width: 50%;">
+
+  <footer class="footer pt-0 pb-0">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              Website template based on
+              <a href="https://github.com/nerfies/nerfies.github.io">
+                Nerfies
+              </a>
+              and licensed under
+              <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+                CC-BY-SA-4.0
+              </a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
