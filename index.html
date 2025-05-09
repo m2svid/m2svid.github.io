@@ -162,7 +162,8 @@
   </script>
 
 
-  <section class="hero teaser">
+  <!-- Teaser section showing comparison between monocular video and stereo views -->
+  <!-- <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
         <div class="columns is-centered">
@@ -179,6 +180,26 @@
               </div>
             </div>
             <img src="./static/images/teaser.gif" alt="Teaser GIF" style="width: 100%; max-width: 1200px; margin: 0 auto; display: block;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <div class="columns is-centered">
+          <div class="column is-10">
+            <div class="columns" style="margin-bottom: 10px;">
+              <div class="column is-half" style="margin-left: -1.5%;">
+                <h4 class="title is-5 has-text-centered">Monocular video</h4>
+              </div>
+              <div class="column is-half" style="margin-left: +3%;">
+                <h4 class="title is-5 has-text-centered">Stereo video (Anaglyph 3D)</h4>
+              </div>
+            </div>
+            <img src="./static/images/teaser2.gif" alt="Teaser GIF" style="width: 100%; max-width: 1200px; margin: 0 auto; display: block;">
           </div>
         </div>
       </div>
@@ -208,7 +229,7 @@
             <p>
               We tackle the problem of monocular-to-stereo video conversion and propose a novel architecture for inpainting and refinement of the warped right view obtained by depth-based reprojection of the input left view. 
               We extend the Stable Video Diffusion (SVD) model to utilize the input left video, the warped right video, and the disocclusion masks as conditioning input to generate a high-quality right camera view. In order to effectively exploit information from neighboring frames for inpainting, we modify the attention layers in SVD to compute full attention for discoccluded pixels. Our model is trained to generate the right view video in an end-to-end manner by minimizing image space losses to ensure high-quality generation. 
-              <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);"><strong>Our approach outperforms previous state-of-the-art methods, obtaining an average rank of 1.43 among the 4 compared methods in a user study, while being \(6 \times\)faster than the second placed method.</strong></span>
+              <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);"><strong>Our approach outperforms previous state-of-the-art methods, obtaining an average rank of 1.43 among the 4 compared methods in a user study, while being \(6 \times\)faster than the second placed method,  StereoCrafter.</strong></span>
             </p>
           </div>
         </div>
@@ -467,10 +488,10 @@
               <div class="column is-four-fifths">
                 <div class="content has-text-justified">
                   <p>
-                    We also perform a user study to evaluate the quality of the generated right views as well as run-time analisys.
-                    Participants were asked to rank the quality of the generated videos from 1 (best) to 4 (worst), 
-                    taking into account factors such as temporal consistency, image quality (i.e. sharpness) and lack of artifacts.
-                    Run-times are computed using an A100 GPU on a 512x512 videos with 16 frames. 
+                    We also conduct a user study to evaluate the quality of the generated right views, as well as a run-time analysis.
+                    Participants were asked to rank the quality of the generated videos from 1 (best) to 4 (worst),
+                    considering factors such as temporal consistency, image quality (i.e., sharpness), and absence of artifacts.
+                    Run-times are measured using an A100 GPU on 512x512 videos with 16 frames. 
                   </p>
                 </div>
 
