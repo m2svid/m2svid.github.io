@@ -257,9 +257,9 @@
           <h2 class="title is-3 has-text-centered" style="padding-top: 20px;">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              We tackle the problem of monocular-to-stereo video conversion and propose a novel architecture for inpainting and refinement of the warped right view obtained by depth-based reprojection of the input left view. 
-              We extend the Stable Video Diffusion (SVD) model to utilize the input left video, the warped right video, and the disocclusion masks as conditioning input to generate a high-quality right camera view. In order to effectively exploit information from neighboring frames for inpainting, we modify the attention layers in SVD to compute full attention for discoccluded pixels. Our model is trained to generate the right view video in an end-to-end manner by minimizing image space losses to ensure high-quality generation. 
-              <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);"><strong>Our approach outperforms previous state-of-the-art methods, obtaining an average rank of 1.43 among the 4 compared methods in a user study, while being \(6 \times\)faster than the second placed method,  StereoCrafter.</strong></span>
+              We tackle the problem of monocular-to-stereo video conversion and propose a novel architecture for inpainting and refinement of the warped right view obtained by depth-based reprojection of the input left view.
+              We extend the Stable Video Diffusion (SVD) model to utilize the input left video, the warped right video, and the disocclusion masks as conditioning input to generate a high-quality right camera view. In order to effectively exploit information from neighboring frames for inpainting, we modify the attention layers in SVD to compute full attention for discoccluded pixels. Our model is trained to generate the right view video in an end-to-end manner without iterative diffusion steps by minimizing image space losses to ensure high-quality generation.
+              <span style="background: linear-gradient(transparent 0%, #fff9c4 100%);"><strong>Our approach outperforms previous state-of-the-art methods, being ranked best \(2.6\times\) more often than the second-place method in a user study, while being \(6\times\) faster.</strong></span>
             </p>
           </div>
         </div>
